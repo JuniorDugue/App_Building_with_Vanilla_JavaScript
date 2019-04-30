@@ -15,7 +15,10 @@
 	let category = 'all';
 
 	// get weather data when user clicks Forecast button, then add temp & conditions to view
-	$('.forecast-button').click(function(e) {
+	// $('.forecast-button').click(function(e) {
+		document.querySelector(".forecast-button").addEventListener("click", function(e){
+
+		
 		e.preventDefault();
 		// const location = $('#location').val();
 		const location = document.querySelector("#location").value;
@@ -37,11 +40,14 @@
 		}).catch(function() {
 			updateUIFailure();
 		}); 
-	});
+	}, false);
 
 	// update list of sports when user selects a different category (solo/team/all)
-	$('.options div').on('click', updateActivityList);
-
+	// $('.options div').on('click', updateActivityList);
+	document.querySelectorAll(".options div").forEach(function(el) {
+		el.addEventListener("click", updateActivityList, false);
+	})
+	
 	// handle ajax success
 	function updateUISuccess(response) {
 		const degC = response.main.temp - 273.15;
